@@ -1,630 +1,897 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Fast Electro Mechanical Solutions - Your Trusted Partner</title>
-   <!-- Tailwind CSS CDN -->
-   <script src="https://cdn.tailwindcss.com"></script>
-   <!-- Font Awesome for social media icons and phone icon -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   <style>
-       /* Custom Tailwind Colors - Black, Red, White Palette */
-       :root {
-           --color-primary-dark: #000000; /* Black */
-           --color-accent-red: #FF0000;   /* Pure Red */
-           --color-neutral-white: #FFFFFF; /* Pure White */
-           --color-neutral-light-gray: #F8F8F8; /* Very subtle light gray, almost white */
-       }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Electro Mechanic Solutions - Your Trusted Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* New fix for sticky header scroll */
+        html {
+            scroll-behavior: smooth;
+            /* scroll-padding-top will be set by JavaScript */
+        }
+        
+        /* Custom Tailwind Colors - Black, Red, White Palette */
+        :root {
+            --color-primary-dark: #000000; /* Black */
+            --color-accent-red: #FF0000;   /* Pure Red */
+            --color-neutral-white: #FFFFFF; /* Pure White */
+            --color-neutral-light-gray: #F8F8F8; /* Very subtle light gray, almost white */
+        }
 
-       /* Applying new color variables */
-       .bg-primary-dark { background-color: var(--color-primary-dark); }
-       .text-primary-dark { color: var(--color-primary-dark); }
-       .bg-accent-red { background-color: var(--color-accent-red); }
-       .text-accent-red { color: var(--color-accent-red); }
-       .bg-neutral-white { background-color: var(--color-neutral-white); }
-       .text-neutral-white { color: var(--color-neutral-white); }
-       .bg-neutral-light-gray { background-color: var(--color-neutral-light-gray); }
-       .text-neutral-light-gray { color: var(--color-neutral-light-gray); }
+        /* Applying new color variables */
+        .bg-primary-dark { background-color: var(--color-primary-dark); }
+        .text-primary-dark { color: var(--color-primary-dark); }
+        .bg-accent-red { background-color: var(--color-accent-red); }
+        .text-accent-red { color: var(--color-accent-red); }
+        .bg-neutral-white { background-color: var(--color-neutral-white); }
+        .text-neutral-white { color: var(--color-neutral-white); }
+        .bg-neutral-light-gray { background-color: var(--color-neutral-light-gray); }
+        .text-neutral-light-gray { color: var(--color-neutral-light-gray); }
 
 
-       /* Custom Font - Inter */
-       body {
-           font-family: 'Inter', sans-serif;
-           scroll-behavior: smooth; /* Ensures smooth scrolling for anchor links */
-           line-height: 1.6; /* Improved readability */
-       }
-       h1, h2, h3, h4, h5, h6 {
-           font-family: 'Inter', sans-serif;
-           letter-spacing: -0.025em; /* Subtle negative letter spacing for modern look */
-       }
+        /* Custom Font - Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6; /* Improved readability */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.025em; /* Subtle negative letter spacing for modern look */
+        }
 
-       /* Responsive Heading Sizes */
-       .hero-h1 {
-           font-size: 2.5rem; /* Default for mobile */
-       }
-       @media (min-width: 640px) { /* sm breakpoint */
-           .hero-h1 {
-               font-size: 3rem;
-           }
-       }
-       @media (min-width: 768px) { /* md breakpoint */
-           .hero-h1 {
-               font-size: 4rem;
-           }
-       }
-       @media (min-width: 1024px) { /* lg breakpoint */
-           .hero-h1 {
-               font-size: 5rem;
-           }
-       }
+        /* Responsive Heading Sizes */
+        .hero-h1 {
+            font-size: 2.5rem; /* Default for mobile */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .hero-h1 {
+                font-size: 3rem;
+            }
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .hero-h1 {
+                font-size: 4rem;
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .hero-h1 {
+                font-size: 5rem;
+            }
+        }
 
-       .section-h2 {
-           font-size: 2rem; /* Default for mobile */
-       }
-       @media (min-width: 640px) { /* sm breakpoint */
-           .section-h2 {
-               font-size: 2.5rem;
-           }
-       }
-       @media (min-width: 768px) { /* md breakpoint */
-           .section-h2 {
-               font-size: 3rem;
-           }
-       }
+        /* UPDATED: Section H2 sizing */
+        .section-h2 {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 800; /* extrabold */
+            line-height: 2.5rem; /* 40px */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .section-h2 {
+                font-size: 3rem; /* 48px */
+                line-height: 1;
+            }
+        }
+    
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--color-primary-dark);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin: 1rem auto;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-       /* Styles for the mobile navigation toggle */
-       .hamburger-menu {
-           display: none; /* Hidden by default on larger screens */
-           cursor: pointer;
-           flex-direction: column;
-           justify-content: space-around;
-           width: 30px;
-           height: 25px;
-           z-index: 50; /* Ensure it's above other content */
-       }
+        /* Styles for the mobile navigation toggle */
+        .hamburger-menu {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            z-index: 50; /* Ensure it's above other content */
+        }
 
-       .hamburger-menu span {
-           display: block;
-           width: 100%;
-           height: 3px;
-           background-color: var(--color-primary-dark); /* Black for hamburger lines on white header */
-           border-radius: 2px;
-           transition: all 0.3s ease-in-out;
-       }
+        .hamburger-menu span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary-dark); /* Black for hamburger lines on white header */
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
 
-       .nav-open .hamburger-menu span:nth-child(1) {
-           transform: rotate(45deg) translate(5px, 5px);
-       }
+        /* Mobile nav open state for hamburger 'X' */
+        .nav-open .hamburger-menu span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-open .hamburger-menu span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-open .hamburger-menu span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
 
-       .nav-open .hamburger-menu span:nth-child(2) {
-           opacity: 0;
-       }
+        .mobile-nav-links {
+            display: none; /* Hidden by default */
+            position: absolute; /* Position relative to its parent (main-header) */
+            top: 100%; /* Position below the main header */
+            left: 0;
+            width: 100%;
+            background-color: var(--color-primary-dark); /* Black background for mobile menu */
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 40; /* Below hamburger, above content */
+        }
 
-       .nav-open .hamburger-menu span:nth-child(3) {
-           transform: rotate(-45deg) translate(5px, -5px);
-       }
+        .mobile-nav-links.active {
+            display: flex; /* Show when active */
+        }
 
-       .mobile-nav-links {
-           display: none; /* Hidden by default */
-           position: absolute; /* Position relative to its parent (main-header) */
-           top: 100%; /* Position below the main header */
-           left: 0;
-           width: 100%;
-           background-color: var(--color-primary-dark); /* Black background for mobile menu */
-           flex-direction: column;
-           align-items: center;
-           padding: 1rem 0;
-           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-           z-index: 40; /* Below hamburger, above content */
-       }
+        .mobile-nav-links li {
+            width: 100%;
+            text-align: center;
+            padding: 0.75rem 0;
+        }
 
-       .mobile-nav-links.active {
-           display: flex; /* Show when active */
-       }
+        .mobile-nav-links a {
+            display: block;
+            padding: 0.5rem 0;
+            width: 100%;
+            color: var(--color-neutral-white); /* White text for mobile nav links */
+        }
 
-       .mobile-nav-links li {
-           width: 100%;
-           text-align: center;
-           padding: 0.75rem 0;
-       }
+        /* Show hamburger on mobile, hide desktop nav */
+        @media (max-width: 1023px) { /* Changed to lg breakpoint */
+            .hamburger-menu {
+                display: flex;
+            }
+            .desktop-nav-links {
+                display: none;
+            }
+            .desktop-cta {
+                display: none;
+            }
+        }
 
-       .mobile-nav-links a {
-           display: block;
-           padding: 0.5rem 0;
-           width: 100%;
-           color: var(--color-neutral-white); /* White text for mobile nav links */
-       }
+        /* Slideshow specific styles */
+        .slideshow-container {
+            max-width: 100%; /* Ensures it doesn't exceed parent width */
+            position: relative;
+            margin: auto;
+            height: 60vh; /* Set a fixed height for the slideshow section */
+            overflow: hidden; /* Hide overflowing parts of images */
+            background-color: #eee; /* Placeholder bg */
+            border-radius: 1rem; /* Added rounding */
+        }
 
-       /* Show hamburger on mobile, hide desktop nav */
-       @media (max-width: 767px) {
-           .hamburger-menu {
-               display: flex;
-           }
-           .desktop-nav-links {
-               display: none;
-           }
-           /* Adjust header padding for better mobile fit */
-           .main-header .container {
-               padding: 0 1rem;
-           }
-       }
+        .mySlides {
+            display: none; /* Hide slides by default */
+            height: 100%; /* Make slides fill the slideshow-container height */
+            width: 100%; /* Make slides fill the slideshow-container width */
+            position: absolute; /* Position absolutely within the slideshow-container */
+            top: 0;
+            left: 0;
+        }
 
-       /* Slideshow specific styles */
-       .slideshow-container {
-           max-width: 100%; /* Ensures it doesn't exceed parent width */
-           position: relative;
-           margin: auto;
-           height: 60vh; /* Set a fixed height for the slideshow section */
-           overflow: hidden; /* Hide overflowing parts of images */
-       }
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the area without distortion, cropping if necessary */
+        }
 
-       .mySlides {
-           display: none; /* Hide slides by default */
-           height: 100%; /* Make slides fill the slideshow-container height */
-           width: 100%; /* Make slides fill the slideshow-container width */
-           position: absolute; /* Position absolutely within the slideshow-container */
-           top: 0;
-           left: 0;
-       }
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5); /* Semi-transparent black */
+            z-index: 10; /* Ensure buttons are above images */
+        }
 
-       .mySlides img {
-           width: 100%;
-           height: 100%;
-           object-fit: cover; /* Ensures the image covers the area without distortion, cropping if necessary */
-       }
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
 
-       /* Next & previous buttons */
-       .prev, .next {
-           cursor: pointer;
-           position: absolute;
-           top: 50%;
-           width: auto;
-           padding: 16px;
-           margin-top: -22px;
-           color: white;
-           font-weight: bold;
-           font-size: 18px;
-           transition: 0.6s ease;
-           border-radius: 0 3px 3px 0;
-           user-select: none;
-           background-color: rgba(0,0,0,0.5); /* Semi-transparent black */
-           z-index: 10; /* Ensure buttons are above images */
-       }
+        /* On hover, add a black background with a little more opacity */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
 
-       /* Position the "next button" to the right */
-       .next {
-           right: 0;
-           border-radius: 3px 0 0 3px;
-       }
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
 
-       /* On hover, add a black background with a little more opacity */
-       .prev:hover, .next:hover {
-           background-color: rgba(0,0,0,0.8);
-       }
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
 
-       /* Fading animation */
-       .fade {
-           animation-name: fade;
-           animation-duration: 1.5s;
-       }
-
-       @keyframes fade {
-           from {opacity: .4}
-           to {opacity: 1}
-       }
-   </style>
-   <!-- Google Fonts - Inter -->
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        /* NEW: Styles for Tabbed Section */
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #9ca3af; /* gray-400 */
+            background-color: transparent;
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .tab-button.active {
+            color: var(--color-primary-dark);
+            border-bottom-color: var(--color-accent-red);
+        }
+        .tab-panel {
+            display: none; /* Hidden by default */
+        }
+        .tab-panel.active {
+            display: block; /* Show active panel */
+        }
+        /* Make panels with grids display correctly */
+        .tab-panel[data-layout="grid"].active {
+            display: grid;
+        }
+       
+    </style>
+    <!-- Google Fonts - Inter --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="bg-neutral-white text-primary-dark antialiased">
 
-   <!-- Top Bar Header (Black Background, Phone Logo, Phone No.) -->
-   <header class="bg-primary-dark text-neutral-white py-2 px-6 w-full">
-       <div class="container mx-auto flex justify-center items-center text-sm">
-           <a href="tel:+919562773436" class="flex items-center space-x-2 hover:text-neutral-white transition duration-300">
-               <i class="fas fa-phone-alt w-4 h-4 text-accent-red"></i> <!-- Phone icon from Font Awesome -->
-               <span>Give Us A Call: +91 9562773436</span>
-           </a>
-       </div>
-   </header>
+    <!-- REDESIGNED Main Header --><header class="main-header bg-neutral-white text-primary-dark py-3 px-6 shadow-lg w-full sticky top-0 border-b border-neutral-light-gray z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo Image --><div class="flex-shrink-0">
+                <a href="#" class="block" aria-label="Fast Electro Mechanic Solutions Home">
+                    <!-- NEW SVG LOGO --><svg class="h-16 md:h-20 w-auto" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M28.431 10.431L18.214 28.334H33.078L22.861 10.431H28.431ZM20.301 30.556L10 46.875V10H16.126L26.343 27.903H11.479L21.696 45.806L31.913 27.903H37L26.783 44.222L37 60H30.874L20.301 42.097V60H14.431V30.556H20.301Z" fill="#000000"/>
+                        <text x="45" y="36" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#000000">FAST</text>
+                        <text x="105" y="36" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#000000">ELECTRO</text>
+                        <rect x="45" y="40" width="150" height="3" fill="#FF0000"/>
+                    </svg>
+                </a>
+            </div>
 
-   <!-- Main Header (White Background, Company Name, Tabs) -->
-   <header class="main-header bg-neutral-white text-primary-dark py-3 px-6 shadow-lg w-full border-b border-neutral-light-gray z-30">
-       <div class="container mx-auto flex justify-between items-center">
-           <!-- Logo Image -->
-           <div class="flex items-center">
-               <a href="#" class="block">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/main/1000091728-removebg-preview.png"
-                        alt="Fast Electro Mechanical Logo"
-                        class="h-24 w-auto object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/200x200/000000/FFFFFF?text=Logo+Missing';">
-               </a>
-           </div>
+            <!-- Desktop Navigation --><nav class="desktop-nav-links hidden lg:block">
+                <ul class="flex space-x-6 text-base font-medium">
+                    <li><a href="#home" class="hover:text-accent-red transition duration-300 ease-in-out">Home</a></li>
+                    <li><a href="#about" class="hover:text-accent-red transition duration-300 ease-in-out">About Us</a></li>
+                    <li><a href="#services" class="hover:text-accent-red transition duration-300 ease-in-out">Services</a></li>
+                    <!-- Updated link to point to the new tabbed section --><li><a href="#work-and-news" class="hover:text-accent-red transition duration-300 ease-in-out">Our Work</a></li>
+                    <li><a href="#work-and-news" class="hover:text-accent-red transition duration-300 ease-in-out">Blog</a></li>
+                    <li><a href="#contact" class="hover:text-accent-red transition duration-300 ease-in-out">Contact</a></li>
+                </ul>
+            </nav>
 
-           <!-- Hamburger Menu for Mobile -->
-           <div class="hamburger-menu md:hidden" id="hamburger">
-               <span></span>
-               <span></span>
-               <span></span>
-           </div>
+            <!-- Desktop CTA & Phone --><div class="desktop-cta hidden lg:flex items-center space-x-6">
+                <a href="tel:+919562773436" class="flex items-center space-x-2 text-sm font-semibold hover:text-accent-red transition duration-300">
+                    <i class="fas fa-phone-alt w-4 h-4 text-accent-red"></i>
+                    <span>+91 95627 73436</span>
+                </a>
+                <a href="#contact" class="bg-accent-red text-neutral-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                    Get a Quote
+                </a>
+            </div>
 
-           <!-- Desktop Navigation -->
-           <nav class="desktop-nav-links hidden md:block">
-               <ul class="flex space-x-6 text-lg">
-                   <li><a href="#home" class="hover:text-accent-red transition duration-300 ease-in-out">Home</a></li>
-                   <li><a href="#about" class="hover:text-accent-red transition duration-300 ease-in-out">About Us</a></li>
-                   <li><a href="#services" class="hover:text-accent-red transition duration-300 ease-in-out">Services</a></li>
-                   <li><a href="#projects" class="hover:text-accent-red transition duration-300 ease-in-out">Our Work</a></li>
-                   <li><a href="#contact" class="hover:text-accent-red transition duration-300 ease-in-out">Contact Us</a></li>
-               </ul>
-           </nav>
-       </div>
-       <!-- Mobile Navigation Links (hidden by default) -->
-       <nav class="mobile-nav-links" id="mobile-nav">
-           <ul class="w-full">
-               <li><a href="#home" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Home</a></li>
-               <li><a href="#about" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">About Us</a></li>
-               <li><a href="#services" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Services</a></li>
-               <li><a href="#projects" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Our Work</a></li>
-               <li><a href="#contact" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Contact Us</a></li>
-           </ul>
-       </nav>
-   </header>
+            <!-- Hamburger Menu for Mobile --><div class="hamburger-menu lg:hidden" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
 
-   <!-- Hero Section (now without slideshow) -->
-   <section id="home" class="relative bg-cover bg-center h-screen flex items-center justify-center text-neutral-white"
-       style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqjMVFBEKO5RYqrm7PtyTXMJirvUyWf6B14vSCgL1vR0z3gqjToY6Ixxo&s=10'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-       <!-- Overlay for better text readability and visual depth -->
-       <div class="absolute inset-0 bg-primary-dark opacity-70 z-10"></div>
-       <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
-           <h1 class="hero-h1 font-extrabold leading-tight mb-6 drop-shadow-lg animate-fade-in-up">
-               Your Trusted Partner for Expert Electro Mechanical Solutions in Kerala
-           </h1>
-           <p class="text-lg sm:text-xl md:text-2xl mb-8 font-light opacity-0 animate-fade-in-up animation-delay-500">
-               Reliable & Fast Electrical and Plumbing Services, Committed to Quality and Safety.
-           </p>
-           <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 opacity-0 animate-fade-in-up animation-delay-1000">
-               <a href="#about" class="bg-accent-red text-neutral-white font-extrabold py-4 px-10 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105 border-2 border-neutral-white">
-                   About Us
-               </a>
-               <a href="#contact" class="bg-primary-dark text-neutral-white font-extrabold py-4 px-10 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105 border-2 border-neutral-white">
-                   Contact Us
-               </a>
-           </div>
-       </div>
-   </section>
+        <!-- Mobile Navigation Links (hidden by default) --><nav class="mobile-nav-links lg:hidden" id="mobile-nav">
+            <ul class="w-full">
+                <li><a href="#home" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Home</a></li>
+                <li><a href="#about" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">About Us</a></li>
+                <li><a href="#services" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Services</a></li>
+                <li><a href="#work-and-news" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Our Work</a></li>
+                <li><a href="#work-and-news" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Blog</a></li>
+                <li><a href="#contact" class="block hover:text-accent-red transition duration-300 ease-in-out py-2">Contact</a></li>
+                <li class="mt-4">
+                    <a href="#contact" class="inline-block bg-accent-red text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out">
+                        Get a Quote
+                    </a>
+                </li>
+                <li class="mt-4">
+                     <a href="tel:+919562773436" class="flex items-center justify-center space-x-2 text-sm font-semibold text-neutral-white hover:text-accent-red transition duration-300">
+                        <i class="fas fa-phone-alt w-4 h-4 text-accent-red"></i>
+                        <span>+91 95627 73436</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-   <!-- New Info Section: 24/7, Home Comfort, 25 Years Experience -->
-   <section class="bg-primary-dark py-12 px-6 text-neutral-white">
-       <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-           <div class="p-6 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
-               <h3 class="text-4xl font-bold mb-2">24/7/365</h3>
-               <p class="text-lg">Customer Care Team</p>
-           </div>
-           <div class="p-6 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
-               <h3 class="text-4xl font-bold mb-2">Complete Home</h3>
-               <p class="text-lg">Comfort Solutions</p>
-           </div>
-           <div class="p-6 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
-               <h3 class="text-4xl font-bold mb-2">25 Years</h3>
-               <p class="text-lg">Experience</p>
-           </div>
-       </div>
-   </section>
+    <!-- Hero Section --><section id="home" class="relative bg-cover bg-center h-[85vh] md:h-screen flex items-center justify-center text-neutral-white -mt-[88px] md:-mt-[96px] pt-[88px] md:pt-[96px]">
+        <!-- Background Image --><div class="absolute inset-0">
+            <!-- NEW, high-quality hero image --><img src="https://images.unsplash.com/photo-1518660324835-b1c0b333604e?q=80&w=1740&auto=format&fit=crop" 
+                 alt="Professional electrical tools on a workbench" 
+                 class="w-full h-full object-cover">
+            <!-- Overlay for better text readability --><div class="absolute inset-0 bg-primary-dark opacity-75 z-10"></div>
+        </div>
+        
+        <!-- Hero Content --><div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+            <h1 class="hero-h1 font-extrabold leading-tight mb-6 drop-shadow-lg">
+                Your Trusted Partner for Expert Electro Mechanic Solutions in Kerala
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-8 font-light">
+                Reliable & Fast Electrical and Plumbing Services, Committed to Quality and Safety.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#about" class="bg-accent-red text-neutral-white font-extrabold py-4 px-10 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105 border-2 border-neutral-white">
+                    Learn More
+                </a>
+                <a href="#contact" class="bg-primary-dark text-neutral-white font-extrabold py-4 px-10 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105 border-2 border-neutral-white">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
 
-   <!-- Trust Symbols / Value Proposition Section -->
-   <section class="bg-neutral-light-gray py-12 px-6">
-       <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-           <div class="p-6 bg-neutral-white rounded-xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-neutral-light-gray">
-               <h3 class="text-2xl font-semibold text-primary-dark mb-3">Licensed & Insured</h3>
-               <p class="text-primary-dark">License No.: CB-10432. Peace of mind knowing your project is handled by certified professionals.</p>
-           </div>
-           <div class="p-6 bg-neutral-white rounded-xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-neutral-light-gray">
-               <h3 class="text-2xl font-semibold text-primary-dark mb-3">24/7 Emergency Service</h3>
-               <p class="text-primary-dark">We're here for you around the clock for urgent electrical and plumbing needs.</p>
-           </div>
-           <div class="p-6 bg-neutral-white rounded-xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-neutral-light-gray">
-               <h3 class="text-2xl font-semibold text-primary-dark mb-3">Customer Satisfaction</h3>
-               <p class="text-primary-dark">Our commitment to quality materials and exceptional service is our priority.</p>
-           </div>
-       </div>
-   </section>
-
-   <!-- Services Section -->
-   <section id="services" class="py-16 px-6 bg-neutral-white">
-       <div class="container mx-auto text-center">
-           <h2 class="section-h2 font-extrabold text-primary-dark mb-10">Our Expert Services</h2>
-           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               <!-- Service Card 1: Electrical Services -->
-               <div class="bg-neutral-white rounded-xl shadow-lg p-8 flex flex-col items-center border border-neutral-light-gray hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
-                   <div class="bg-accent-red p-4 rounded-full mb-6">
-                       <svg class="w-12 h-12 text-neutral-white" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                       </svg>
-                   </div>
-                   <h3 class="text-2xl font-semibold text-primary-dark mb-4">Electrical Services</h3>
-                   <p class="text-primary-dark mb-6">
-                       From new installations to complex repairs, our certified electricians ensure safe and efficient electrical systems for your home or business.
-                   </p>
-                   <a href="#contact" class="bg-primary-dark text-neutral-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
-                       Get a Quote
-                   </a>
+    <!-- About Us Section (Redesigned) --><section id="about" class="py-16 md:py-24 px-6 bg-neutral-light-gray">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <!-- Image Column --><div class="rounded-2xl overflow-hidden shadow-2xl">
+                   <!-- Replaced with the user-provided image --><img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/plumber%20working%20on%20pipe.png" 
+                        alt="Professional plumber working on pipes" 
+                        class="w-full h-full object-cover">
                </div>
-               <!-- Service Card 2: Plumbing Services -->
-               <div class="bg-neutral-white rounded-xl shadow-lg p-8 flex flex-col items-center border border-neutral-light-gray hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
-                   <div class="bg-accent-red p-4 rounded-full mb-6">
-                       <svg class="w-12 h-12 text-neutral-white" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.35 0-4.25-1.9-4.25-4.25S9.65 7.5 12 7.5s4.25 1.9 4.25 4.25-1.9 4.25-4.25 4.25zM12 9c-1.38 0-2.5 1.12-2.5 2.5S10.62 14 12 14s2.5-1.12 2.5-2.5S13.38 9 12 9z"/>
-                       </svg>
-                   </div>
-                   <h3 class="text-2xl font-semibold text-primary-dark mb-4">Plumbing Services</h3>
-                   <p class="text-primary-dark mb-6">
-                       Reliable plumbing solutions including leak detection, pipe repair, fixture installation, and complete system overhauls.
-                   </p>
-                   <a href="#contact" class="bg-primary-dark text-neutral-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
-                       Get a Quote
-                   </a>
-               </div>
-               <!-- Service Card 3: Mechanical Solutions -->
-               <div class="bg-neutral-white rounded-xl shadow-lg p-8 flex flex-col items-center border border-neutral-light-gray hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
-                   <div class="bg-accent-red p-4 rounded-full mb-6">
-                       <svg class="w-12 h-12 text-neutral-white" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                       </svg>
-                   </div>
-                   <h3 class="text-2xl font-semibold text-primary-dark mb-4">Comprehensive Mechanical Solutions</h3>
-                   <p class="text-primary-dark mb-6">
-                       Beyond electrical and plumbing, we offer a range of mechanical services tailored to your specific needs.
-                   </p>
-                   <a href="#contact" class="bg-primary-dark text-neutral-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
-                       Get a Quote
-                   </a>
-               </div>
-           </div>
-       </div>
-   </section>
+                <!-- Text Column --><div class="text-left">
+                    <span class="text-accent-red font-semibold text-lg">About Us</span>
+                    <h2 class="section-h2 text-primary-dark mt-2 mb-6">Your Trusted Local Experts</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                        At Fast Electro Mechanic Solutions, led by owner <span class="font-semibold text-primary-dark">Jobin Kurian</span>, we are dedicated to providing top-tier electrical and plumbing services across <span class="font-semibold text-primary-dark">Vellikulam</span>, and surrounding areas of Kerala. With 25 years of experience, we pride ourselves on our commitment to safety, quality materials, and unparalleled customer satisfaction.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        Our mission is to be your reliable partner for all your electro-mechanic needs, ensuring efficient and lasting solutions for both residential and commercial clients.
+                    </p>
+                    
+                    <!-- NEW: Info Cards integrated here --><div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-neutral-white text-primary-dark p-4 rounded-lg shadow-md text-center">
+                            <i class="fas fa-clock fa-lg text-accent-red mb-2"></i>
+                            <h4 class="text-lg font-bold">24/7/365</h4>
+                            <p class="text-sm">Customer Care</p>
+                        </div>
+                        <div class="bg-neutral-white text-primary-dark p-4 rounded-lg shadow-md text-center">
+                            <i class="fas fa-home fa-lg text-accent-red mb-2"></i>
+                            <h4 class="text-lg font-bold">Complete Home</h4>
+                            <p class="text-sm">Solutions</p>
+                        </div>
+                        <div class="bg-neutral-white text-primary-dark p-4 rounded-lg shadow-md text-center">
+                            <i class="fas fa-medal fa-lg text-accent-red mb-2"></i>
+                            <h4 class="text-lg font-bold">25 Years</h4>
+                            <p class="text-sm">Experience</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="bg-accent-red text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Get a Free Consultation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-   <!-- About Us Section -->
-   <section id="about" class="py-16 px-6 bg-primary-dark text-neutral-white">
-       <div class="container mx-auto text-center max-w-4xl">
-           <h2 class="section-h2 font-extrabold mb-8">About Fast Electro Mechanical Solutions</h2>
-           <p class="text-lg leading-relaxed mb-6">
-               At Fast Electro Mechanical Solutions, led by owner <span class="font-semibold text-accent-red">Jobin Kurian</span>, we are dedicated to providing top-tier electrical and plumbing services across Changanassery, Vellikulam, and surrounding areas of Kerala. With years of experience and a team of highly skilled professionals, we pride ourselves on our commitment to safety, quality materials, and unparalleled customer satisfaction.
-           </p>
-           <p class="text-lg leading-relaxed">
-               Our mission is to be your trusted partner for all your electro-mechanical needs, ensuring reliable, efficient, and lasting solutions for both residential and commercial clients. We believe in transparent communication, timely service, and building long-term relationships based on trust and exceptional workmanship.
-           </p>
-           <a href="#contact" class="mt-8 inline-block bg-accent-red text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
-               Get a Free Consultation
-           </a>
-       </div>
-   </section>
+    <!-- Services Section (Redesigned) --><section id="services" class="py-16 md:py-24 px-6 bg-neutral-white">
+        <div class="container mx-auto text-center">
+            <span class="text-accent-red font-semibold text-lg">What We Do</span>
+            <h2 class="section-h2 text-primary-dark mt-2 mb-12">Our Expert Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Service Card 1: Electrical Services --><div class="bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div class="bg-accent-red p-4 rounded-full mb-6">
+                        <svg class="w-12 h-12 text-neutral-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-primary-dark mb-4">Electrical Services</h3>
+                    <p class="text-primary-dark mb-6 text-gray-700">
+                        From new installations to complex repairs, our certified electricians ensure safe and efficient electrical systems for your home or business.
+                    </p>
+                    <a href="#contact" class="bg-primary-dark text-neutral-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
+                        Get a Quote
+                    </a>
+                </div>
+                <!-- Service Card 2: Plumbing Services --><div class="bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div class="bg-accent-red p-4 rounded-full mb-6">
+                        <!-- Simple water drop icon --><svg class="w-12 h-12 text-neutral-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.25c-4.14 0-7.5 3.36-7.5 7.5 0 4.14 7.5 11.25 7.5 11.25s7.5-7.11 7.5-11.25c0-4.14-3.36-7.5-7.5-7.5zM12 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-primary-dark mb-4">Plumbing Services</h3>
+                    <p class="text-primary-dark mb-6 text-gray-700">
+                        Reliable plumbing solutions including leak detection, pipe repair, fixture installation, and complete system overhauls.
+                    </p>
+                    <a href="#contact" class="bg-primary-dark text-neutral-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
+                        Get a Quote
+                    </a>
+                </div>
+                <!-- Service Card 3: Mechanical Solutions --><div class="bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div class="bg-accent-red p-4 rounded-full mb-6">
+                        <!-- Simple settings/cog icon --><svg class="w-12 h-12 text-neutral-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37-2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-primary-dark mb-4">Mechanical Solutions</h3>
+                    <p class="text-primary-dark mb-6 text-gray-700">
+                        Beyond electrical and plumbing, we offer a range of mechanical services tailored to your specific needs.
+                    </p>
+                    <a href="#contact" class="bg-primary-dark text-neutral-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
+                        Get a Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-   <!-- Photo Slideshow Section -->
-   <section id="photo-slideshow" class="py-16 px-6 bg-neutral-light-gray">
-       <div class="container mx-auto text-center">
-           <h2 class="section-h2 font-extrabold text-primary-dark mb-10">Our Gallery</h2>
-           <div class="slideshow-container">
-               <!-- Slides (Updated with new image URLs) -->
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0030.jpg" alt="Gallery Image 1">
-               </div>
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0037.jpg" alt="Gallery Image 2">
-               </div>
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0035.jpg" alt="Gallery Image 3">
-               </div>
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0043.jpg" alt="Gallery Image 4">
-               </div>
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0045.jpg" alt="Gallery Image 5">
-               </div>
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0047.jpg" alt="Gallery Image 6">
-               </div>
-               <div class="mySlides fade">
-                   <img src="https://raw.githubusercontent.com/Lumina-Web-Solutions/Fast-Electro-mechanical-Solutions-/refs/heads/main/IMG-20250727-WA0049.jpg" alt="Gallery Image 7">
-               </div>
+    <!-- NEW: Combined Tabbed Section for Work, Gallery, Blog --><section id="work-and-news" class="py-16 md:py-24 px-6 bg-neutral-light-gray">
+        <div class="container mx-auto text-center max-w-6xl">
+            <!-- Tab Navigation --><div class="flex justify-center border-b border-gray-300 mb-12" id="tabs-nav">
+                <button class="tab-button active" data-target="projects-panel">Completed Projects</button>
+                <button class="tab-button" data-target="gallery-panel">Gallery</button>
+                <button class="tab-button" data-target="blog-panel">Latest Blog</button>
+            </div>
 
-               <!-- Next and previous buttons -->
-               <a class="prev" onclick="plusSlides(-1)" aria-label="Previous Slide">❮</a>
-               <a class="next" onclick="plusSlides(1)" aria-label="Next Slide">❯</a>
-           </div>
-       </div>
-   </section>
+            <!-- Tab Content Panels --><div>
+                <!-- Panel 1: Projects (Dynamic) --><div id="projects-panel" class="tab-panel active" data-layout="grid">
+                    <div id="projects-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Project cards will be dynamically inserted here by JavaScript --><p class="text-lg text-primary-dark col-span-full">Loading projects...</p>
+                    </div>
+                    <a href="#contact" class="mt-12 inline-block bg-primary-dark text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Request an Estimate
+                    </a>
+                </div>
 
-   <!-- Our Work / Projects Section -->
-   <section id="projects" class="bg-neutral-light-gray py-16 px-6">
-       <div class="container mx-auto text-center">
-           <h2 class="section-h2 font-extrabold text-primary-dark mb-10">Our Completed Projects</h2>
-           <p class="text-lg text-primary-dark mb-8 max-w-2xl mx-auto">
-               Showcasing our commitment to excellence through high-quality electrical and plumbing installations.
-           </p>
-           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-               <!-- Project Card 1 -->
-               <div class="bg-neutral-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-                   <img src="https://placehold.co/600x400/000000/F8F8F8?text=Residential+Electrical+Project" alt="Completed Electrical Installation" class="w-full h-48 object-cover">
-                   <div class="p-6">
-                       <h3 class="text-xl font-semibold text-primary-dark mb-2">Modern Wiring Upgrade</h3>
-                       <p class="text-primary-dark text-sm">Residential electrical system overhaul for enhanced safety and efficiency.</p>
-                   </div>
-               </div>
-               <!-- Project Card 2 -->
-               <div class="bg-neutral-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-                   <img src="https://placehold.co/600x400/000000/F8F8F8?text=Commercial+Plumbing+Project" alt="New Bathroom Plumbing" class="w-full h-48 object-cover">
-                   <div class="p-6">
-                       <h3 class="text-xl font-semibold text-primary-dark mb-2">Bathroom Renovation Plumbing</h3>
-                       <p class="text-primary-dark text-sm">Complete plumbing installation for a luxurious new bathroom.</p>
-                   </div>
-               </div>
-               <!-- Project Card 3 -->
-               <div class="bg-neutral-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-                   <img src="https://placehold.co/600x400/000000/F8F8F8?text=Industrial+Mechanical+Work" alt="Commercial HVAC Installation" class="w-full h-48 object-cover">
-                   <div class="p-6">
-                       <h3 class="text-xl font-semibold text-primary-dark mb-2">Commercial HVAC System</h3>
-                       <p class="text-primary-dark text-sm">Efficient and reliable HVAC system installation for a commercial building.</p>
-                   </div>
-               </div>
-           </div>
-           <a href="#" class="mt-10 inline-block bg-primary-dark text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
-               View All Projects
-           </a>
-       </div>
-   </section>
+                <!-- Panel 2: Gallery (Dynamic) --><div id="gallery-panel" class="tab-panel">
+                    <div id="slideshow-container-dynamic" class="slideshow-container">
+                        <!-- Slides will be dynamically inserted here by JavaScript --><p class="text-lg text-primary-dark p-10">Loading gallery...</p>
+                        <!-- Next and previous buttons --><a class="prev" onclick="plusSlides(-1)" aria-label="Previous Slide">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)" aria-label="Next Slide">&#10095;</a>
+                    </div>
+                </div>
 
-   <!-- Testimonials Section -->
-   <section class="bg-primary-dark text-neutral-white py-16 px-6">
-       <div class="container mx-auto text-center">
-           <h2 class="section-h2 font-extrabold mb-10">What Our Clients Say</h2>
-           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-               <div class="bg-neutral-white text-primary-dark p-8 rounded-xl shadow-lg">
-                   <p class="italic text-lg mb-4">"Fast Electro Mechanical Solutions provided excellent service. They were quick, professional, and fixed our plumbing issue perfectly. Highly recommended!"</p>
-                   <p class="font-semibold text-primary-dark">- Rajesh K., Homeowner</p>
-               </div>
-               <div class="bg-neutral-white text-primary-dark p-8 rounded-xl shadow-lg">
-                   <p class="italic text-lg mb-4">"Their team handled our commercial electrical installation with utmost precision and efficiency. A truly reliable partner for any business."</p>
-                   <p class="font-semibold text-primary-dark">- Priya S., Business Owner</p>
-               </div>
-           </div>
-       </div>
-   </section>
+                <!-- Panel 3: Blog (Dynamic) --><div id="blog-panel" class="tab-panel" data-layout="grid">
+                    <div id="blog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <!-- Blog posts will be dynamically inserted here by JavaScript --><p class="text-lg text-primary-dark col-span-full">Loading blog posts...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section --><section class="bg-primary-dark text-neutral-white py-16 md:py-24 px-6">
+        <div class="container mx-auto text-center">
+            <span class="text-accent-red font-semibold text-lg">Testimonials</span>
+            <h2 class="section-h2 text-neutral-white mt-2 mb-12">What Our Clients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Restyled Testimonial Card --><div class="bg-gray-800 text-neutral-white p-8 rounded-2xl shadow-lg text-left">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="italic text-lg mb-6 text-gray-300">"Fast Electro Mechanic Solutions provided excellent service. They were quick, professional, and fixed our plumbing issue perfectly. Highly recommended!"</p>
+                    <p class="font-semibold text-neutral-white">- Rajesh K., Homeowner</p>
+                </div>
+                <!-- Restyled Testimonial Card --><div class="bg-gray-800 text-neutral-white p-8 rounded-2xl shadow-lg text-left">
+                     <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="italic text-lg mb-6 text-gray-300">"Their team handled our commercial electrical installation with utmost precision and efficiency. A truly reliable partner for any business."</p>
+                    <p class="font-semibold text-neutral-white">- Priya S., Business Owner</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-   <!-- Contact Us Section -->
-   <section id="contact" class="py-16 px-6 bg-neutral-white">
-       <div class="container mx-auto text-center max-w-3xl">
-           <h2 class="section-h2 font-extrabold text-primary-dark mb-8">Get Your Free Estimate Today!</h2>
-           <p class="text-lg text-primary-dark mb-8">
-               Ready to experience fast, reliable, and professional electro-mechanical solutions? Contact us today for a free consultation and estimate. We proudly serve Changanassery, Vellikulam, and surrounding areas of Kerala.
-           </p>
-           <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
-               <a href="tel:+919562773436" class="bg-accent-red text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
-                   <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.03 21 3 13.97 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.57.11.35.02.75-.25 1.02L6.62 10.79z"/></svg>
-                   Call Us: +91 9562773436
-               </a>
-               <a href="mailto:jobinkuriankuriankottarathil@gmail.com" class="bg-primary-dark text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
-                   <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                   Email Us: jobinkuriankottarathil@gmail.com
-               </a>
-           </div>
-           <!-- Simple Contact Form Placeholder -->
-           <div class="bg-neutral-white p-8 rounded-xl shadow-lg max-w-lg mx-auto border border-neutral-light-gray">
-               <form class="space-y-4">
-                   <div>
-                       <label for="name" class="block text-left text-primary-dark font-semibold mb-1">Your Name</label>
-                       <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-primary-dark rounded-md focus:outline-none focus:ring-2 focus:ring-accent-red" placeholder="John Doe">
-                   </div>
-                   <div>
-                       <label for="email" class="block text-left text-primary-dark font-semibold mb-1">Your Email</label>
-                       <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-primary-dark rounded-md focus:outline-none focus:ring-2 focus:ring-accent-red" placeholder="john.doe@example.com">
-                   </div>
-                   <div>
-                       <label for="message" class="block text-left text-primary-dark font-semibold mb-1">Your Message</label>
-                       <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-primary-dark rounded-md focus:outline-none focus:ring-2 focus:ring-accent-red" placeholder="Tell us about your project..."></textarea>
-                   </div>
-                   <button type="submit" class="bg-primary-dark text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
-                       Send Message
-                   </button>
-               </form>
-           </div>
-       </div>
-   </section>
+    <!-- Contact Us Section --><section id="contact" class="py-16 md:py-24 px-6 bg-neutral-light-gray">
+        <div class="container mx-auto text-center max-w-3xl">
+            <span class="text-accent-red font-semibold text-lg">Get in Touch</span>
+            <h2 class="section-h2 text-primary-dark mt-2 mb-8">Get Your Free Estimate Today!</h2>
+            <p class="text-lg text-gray-700 mb-8">
+                Ready to experience fast, reliable, and professional electro-mechanic solutions? Contact us today for a free consultation and estimate. We proudly serve <span class="font-semibold text-primary-dark">Vellikulam</span>, and surrounding areas of Kerala.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-10">
+                <a href="tel:+919562773436" class="bg-accent-red text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.03 21 3 13.97 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.57.11.35.02.75-.25 1.02L6.62 10.79z"/></svg>
+                    Call Us: +91 95627 73436
+                </a>
+                <a href="mailto:jobinkuriankuriankottarathil@gmail.com" class="bg-primary-dark text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Email Us
+                </a>
+            </div>
+            <!-- Simple Contact Form Placeholder --><div class="bg-neutral-white p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-neutral-light-gray">
+                <form class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-left text-primary-dark font-semibold mb-1">Your Name</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-primary-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-red" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-left text-primary-dark font-semibold mb-1">Your Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-primary-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-red" placeholder="john.doe@example.com">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-left text-primary-dark font-semibold mb-1">Your Message</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-primary-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-red" placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="bg-primary-dark text-neutral-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-   <!-- Social Media Section -->
-   <section class="social-media-bottom py-8 bg-primary-dark">
-       <div class="container mx-auto">
-           <div class="flex justify-center space-x-6 text-2xl">
-               <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition duration-300 ease-in-out transform hover:scale-125">
-                   <i class="fab fa-instagram"></i>
-               </a>
-               <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition duration-300 ease-in-out transform hover:scale-125">
-                   <i class="fab fa-facebook-f"></i>
-               </a>
-               <a href="https://wa.me/919562773436" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition duration-300 ease-in-out transform hover:scale-125">
-                   <i class="fab fa-whatsapp"></i>
-               </a>
-               <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition duration-300 ease-in-out transform hover:scale-125">
-                   <i class="fab fa-x-twitter"></i>
-               </a>
-           </div>
-       </div>
-   </section>
+    <!-- REDESIGNED Footer Section --><footer class="bg-primary-dark text-neutral-white pt-16 pb-8 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+                <!-- Column 1: Logo & About --><div>
+                    <a href="#" class="inline-block mb-4" aria-label="Fast Electro Mechanic Solutions Home">
+                        <svg class="h-16 w-auto" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M28.431 10.431L18.214 28.334H33.078L22.861 10.431H28.431ZM20.301 30.556L10 46.875V10H16.126L26.343 27.903H11.479L21.696 45.806L31.913 27.903H37L26.783 44.222L37 60H30.874L20.301 42.097V60H14.431V30.556H20.301Z" fill="#FFFFFF"/>
+                            <text x="45" y="36" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">FAST</text>
+                            <text x="105" y="36" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#FFFFFF">ELECTRO</text>
+                            <rect x="45" y="40" width="150" height="3" fill="#FF0000"/>
+                        </svg>
+                    </a>
+                    <p class="text-sm text-gray-400">
+                        Your trusted partner for 25 years in expert electrical and plumbing solutions in Kerala.
+                    </p>
+                </div>
+                
+                <!-- Column 2: Quick Links --><div>
+                    <h4 class="text-lg font-semibold text-neutral-white mb-4">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-accent-red transition duration-300">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-accent-red transition duration-300">Services</a></li>
+                        <li><a href="#work-and-news" class="text-gray-400 hover:text-accent-red transition duration-300">Our Work</a></li>
+                        <li><a href="#work-and-news" class="text-gray-400 hover:text-accent-red transition duration-300">Blog</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent-red transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
 
-   <!-- Footer Section -->
-   <footer class="bg-primary-dark text-neutral-white py-8 px-6">
-       <div class="container mx-auto text-center text-sm">
-           <p>© 2025 Fast Electro Mechanical Solutions. All rights reserved.</p>
-           <p class="mt-2">Powered by Lumina Web Solutions</p>
-           <div class="flex justify-center space-x-4 mt-4">
-               <a href="#" class="hover:text-accent-red transition duration-300 ease-in-out">Privacy Policy</a>
-               <a href="#" class="hover:text-accent-red transition duration-300 ease-in-out">Terms of Service</a>
-           </div>
-       </div>
-   </footer>
+                <!-- Column 3: Contact Info --><div>
+                    <h4 class="text-lg font-semibold text-neutral-white mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center justify-center md:justify-start space-x-2">
+                            <i class="fas fa-map-marker-alt fa-fw text-accent-red"></i>
+                            <span>Vellikulam, Kerala, India</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start space-x-2">
+                            <i class="fas fa-phone-alt fa-fw text-accent-red"></i>
+                            <a href="tel:+919562773436" class="hover:text-accent-red transition duration-300">+91 95627 73436</a>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start space-x-2">
+                            <i class="fas fa-envelope fa-fw text-accent-red"></i>
+                            <a href="mailto:jobinkuriankuriankottarathil@gmail.com" class="hover:text-accent-red transition duration-300 text-xs sm:text-sm">jobinkuriankuriankottarathil@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
 
-   <script>
-       let slideIndex = 0;
-       let slideshowInterval; // To store the interval ID for auto-play
+                <!-- Column 4: Social Media --><div>
+                    <h4 class="text-lg font-semibold text-neutral-white mb-4">Follow Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-5 text-2xl">
+                        <a href="https://www.instagram.com/__fast_electro_mechanical_?igsh=MWcxOHh0eXh5dXpobQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent-red transition duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://m.facebook.com/jobinkuriankottarathil/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent-red transition duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/919562773436" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent-red transition duration-300 transform hover:scale-110">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent-red transition duration-300 transform hover:scale-110">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-       function showSlides() {
-           let i;
-           let slides = document.getElementsByClassName("mySlides");
-           for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";
+            <!-- Bottom Bar --><div class="border-t border-gray-700 mt-12 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2025 Fast Electro Mechanic Solutions. All rights reserved.</p>
+                <p class="mt-2">Powered by Lumina Web Solutions</p>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <a href="#" class="hover:text-accent-red transition duration-300 ease-in-out">Privacy Policy</a>
+                    <a href="#" class="hover:text-accent-red transition duration-300 ease-in-out">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK Scripts --><script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getFirestore, 
+            collection, 
+            onSnapshot, // Using onSnapshot for real-time updates
+            setLogLevel
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- NEW FIREBASE CONFIG ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2LGYQeZxGPLrqPu9SmI_jnyfEFb_1ERM",
+            authDomain: "fast-electromechanic-sol-64831.firebaseapp.com",
+            projectId: "fast-electromechanic-sol-64831",
+            storageBucket: "fast-electromechanic-sol-64831.firebasestorage.app",
+            messagingSenderId: "1086586935220",
+            appId: "1:1086586935220:web:22a964fd9e38c6598084e1",
+            measurementId: "G-84YKKFDT01"
+        };
+        
+        // Use projectId as the appId for database paths
+        const appId = firebaseConfig.projectId; 
+        
+        // Initialize Firebase
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            setLogLevel('debug'); // For development, shows logs
+            console.log("Firebase Initialized Successfully.");
+        } catch (e) {
+            console.error("Error initializing Firebase: ", e);
+            document.body.innerHTML = `<div style="padding: 2rem; text-align: center; font-size: 1.2rem; color: red;">Error: Could not connect to the database. Please check Firebase configuration.</div>`;
+        }
+
+        // --- COLLECTION REFERENCES ---
+        // Using the public path structure
+        const blogCollection = collection(db, `artifacts/${appId}/public/data/blog`);
+        const projectsCollection = collection(db, `artifacts/${appId}/public/data/projects`);
+        const galleryCollection = collection(db, `artifacts/${appId}/public/data/gallery`);
+
+
+        // --- LOAD DYNAMIC CONTENT WITH REAL-TIME LISTENER ---
+        
+        // 1. Load Blog Posts
+        function loadBlogPosts() {
+            const container = document.getElementById('blog-posts-container');
+            if (!container) return; // Safety check
+            
+            onSnapshot(blogCollection, (querySnapshot) => {
+                container.innerHTML = ''; // Clear existing content
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<p class="text-lg text-gray-700 col-span-full">No blog posts found. Check back soon!</p>';
+                    return;
+                }
+                
+                querySnapshot.forEach((doc) => {
+                    const post = doc.data();
+                    // Create card for public site
+                    const postDate = post.createdAt?.toDate ? new Date(post.createdAt.toDate()) : new Date();
+                    const postCard = `
+                        <div class="bg-neutral-white rounded-2xl shadow-xl overflow-hidden border border-neutral-light-gray text-left transition duration-300 transform hover:shadow-2xl hover:-translate-y-1">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-primary-dark mb-2">${post.title || 'Blog Post'}</h3>
+                                <p class="text-gray-500 text-sm mb-4">${postDate.toLocaleDateString()}</p>
+                                <p class="text-gray-700 text-base mb-4">${post.content || '...'}</p>
+                                <a href="#" class="font-bold text-accent-red hover:text-red-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += postCard;
+                });
+            }, (error) => {
+                console.error("Error loading blog posts: ", error);
+                container.innerHTML = '<p class="text-lg text-red-500 col-span-full">Error loading blog posts.</p>';
+            });
+        }
+        
+        // 2. Load Projects
+        function loadProjects() {
+            const container = document.getElementById('projects-container');
+            if (!container) return; // Safety check
+            
+            onSnapshot(projectsCollection, (querySnapshot) => {
+                container.innerHTML = ''; // Clear existing content
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<p class="text-lg text-gray-700 col-span-full">No projects to display. Check back soon!</p>';
+                    return;
+                }
+                
+                querySnapshot.forEach((doc) => {
+                    const project = doc.data();
+                    // Create card for public site
+                    const projectCard = `
+                        <div class="bg-neutral-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-neutral-light-gray">
+                            <img src="${project.imageUrl || 'https://placehold.co/600x400/000000/F8F8F8?text=Project+Image'}" alt="${project.title || 'Project'}" class="w-full h-56 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/000000/F8F8F8?text=Image+Missing';">
+                            <div class="p-6 text-left">
+                                <h3 class="text-xl font-semibold text-primary-dark mb-2">${project.title || 'Project Title'}</h3>
+                                <p class="text-gray-700 text-base">${project.description || '...'}</p>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += projectCard;
+                });
+            }, (error) => {
+                console.error("Error loading projects: ", error);
+                container.innerHTML = '<p class="text-lg text-red-500 col-span-full">Error loading projects.</p>';
+            });
+        }
+        
+        // 3. Load Gallery Images
+        function loadGalleryImages() {
+            const container = document.getElementById('slideshow-container-dynamic');
+            if (!container) return; // Safety check
+            
+            onSnapshot(galleryCollection, (querySnapshot) => {
+                // Clear all BUT the prev/next buttons
+                container.querySelectorAll('.mySlides').forEach(el => el.remove());
+                container.querySelectorAll('p').forEach(el => el.remove()); // Remove loading text
+                
+                if (querySnapshot.empty) {
+                    container.insertAdjacentHTML('afterbegin', '<p class="text-lg text-primary-dark p-10">No gallery images found.</p>');
+                    return;
+                }
+                
+                querySnapshot.forEach((doc) => {
+                    const image = doc.data();
+                    // Create slide for public site
+                    const slide = `
+                        <div class="mySlides fade">
+                            <img src="${image.imageUrl}" alt="${image.altText || 'Gallery Image'}" onerror="this.onerror=null; this.src='https://placehold.co/1200x800/000000/F8F8F8?text=Gallery+Image+Missing';">
+                        </div>
+                    `;
+                    // Insert slide *before* the prev/next buttons
+                    container.insertAdjacentHTML('afterbegin', slide);
+                });
+                
+                // Re-initialize the slideshow
+                slideIndex = 0; // Reset index
+                showSlides(); // Start the slideshow
+                
+            }, (error) => {
+                console.error("Error loading gallery: ", error);
+                container.insertAdjacentHTML('afterbegin', '<p class="text-lg text-red-500 p-10">Error loading gallery.</p>');
+            });
+        }
+
+        // --- NEW: TAB INITIALIZATION ---
+        function initTabs() {
+            const tabContainer = document.getElementById('tabs-nav');
+            if (!tabContainer) return; // Don't run if tabs aren't on the page
+
+            const tabButtons = tabContainer.querySelectorAll('.tab-button');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetPanelId = button.dataset.target;
+                    const targetPanel = document.getElementById(targetPanelId);
+
+                    // Remove active class from all buttons and panels
+                    tabContainer.querySelector('.tab-button.active').classList.remove('active');
+                    document.querySelector('.tab-panel.active').classList.remove('active');
+
+                    // Add active class to the clicked button and target panel
+                    button.classList.add('active');
+                    targetPanel.classList.add('active');
+
+                    // Special check for slideshow: re-initialize if it's the target
+                    if (targetPanelId === 'gallery-panel') {
+                        slideIndex = 0;
+                        showSlides();
+                    }
+                });
+            });
+        }
+
+        // --- RUN ON PAGE LOAD ---
+        document.addEventListener('DOMContentLoaded', () => {
+           
+           // --- NEW HEADER SCROLL FIX ---
+           const header = document.querySelector('.main-header');
+           
+           function setScrollPadding() {
+               if (header) {
+                   const headerHeight = header.offsetHeight;
+                   document.documentElement.style.scrollPaddingTop = headerHeight + 'px';
+               }
            }
-           slideIndex++;
-           if (slideIndex > slides.length) {slideIndex = 1}
-           slides[slideIndex-1].style.display = "block";
-           // Restart auto-play after manual navigation
-           clearTimeout(slideshowInterval); // Clear any existing interval
-           slideshowInterval = setTimeout(showSlides, 5000); // Change image every 5 seconds
-       }
+           
+           setScrollPadding(); // Set on initial load
+           window.addEventListener('resize', setScrollPadding); // Update on window resize
+           // --- END HEADER SCROLL FIX ---
+           
+            if (app) {
+               // Load all content directly
+               loadBlogPosts();
+               loadProjects();
+               loadGalleryImages();
+            }
 
-       function plusSlides(n) {
-           showSpecificSlide(slideIndex += n);
-       }
+            // Mobile Nav Toggle
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobile-nav');
+            const navLinks = mobileNav.querySelectorAll('a');
+            
+            if (hamburger && mobileNav) {
+                hamburger.addEventListener('click', () => {
+                    mobileNav.classList.toggle('active');
+                    hamburger.closest('.main-header').classList.toggle('nav-open');
+                });
+                
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileNav.classList.remove('active');
+                        hamburger.closest('.main-header').classList.remove('nav-open');
+                    });
+                });
+            }
 
-       function showSpecificSlide(n) {
-           let i;
-           let slides = document.getElementsByClassName("mySlides");
-           if (n > slides.length) {slideIndex = 1}
-           if (n < 1) {slideIndex = slides.length}
-           for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";
-           }
-           slides[slideIndex-1].style.display = "block";
-           // Restart auto-play after manual navigation
-           clearTimeout(slideshowInterval); // Clear any existing interval
-           slideshowInterval = setTimeout(showSlides, 5000); // Change image every 5 seconds
-       }
+            // Initialize tabs
+            initTabs();
+        });
+        
+        // --- SLIDESHOW SCRIPT ---
+        // Needs to be global to be called by onclick and loadGalleryImages
+        let slideIndex = 0;
+        let slideshowInterval; 
 
-       // Initial call to start the slideshow when the DOM is ready
-       document.addEventListener('DOMContentLoaded', (event) => {
-           if (document.getElementsByClassName("mySlides").length > 0) {
-               showSlides();
-           }
-       });
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            if (slides.length === 0) return; // Don't run if no slides
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            
+            clearTimeout(slideshowInterval);
+            slideshowInterval = setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
 
-       // JavaScript for mobile navigation toggle
-       const hamburger = document.getElementById('hamburger');
-       const mobileNav = document.getElementById('mobile-nav');
-       const navLinks = mobileNav.querySelectorAll('a');
+        // Make functions globally accessible for onclick
+        window.plusSlides = function(n) {
+            showSpecificSlide(slideIndex += n);
+        }
 
-       hamburger.addEventListener('click', () => {
-           mobileNav.classList.toggle('active');
-           hamburger.closest('.main-header').classList.toggle('nav-open'); // Toggle class on main-header for hamburger animation
-       });
-
-       // Close mobile nav when a link is clicked
-       navLinks.forEach(link => {
-           link.addEventListener('click', () => {
-               mobileNav.classList.remove('active');
-               hamburger.closest('.main-header').classList.remove('nav-open');
-           });
-       });
-   </script>
+        function showSpecificSlide(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            if (slides.length === 0) return;
+            
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+            
+            clearTimeout(slideshowInterval);
+            slideshowInterval = setTimeout(showSlides, 5000);
+        }
+        
+    </script>
 
 </body>
 </html>
