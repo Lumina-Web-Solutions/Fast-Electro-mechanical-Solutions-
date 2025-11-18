@@ -243,14 +243,20 @@
 
         /* NEW: Styles for Tabbed Section */
         .tab-button {
-            padding: 0.75rem 1.5rem;
-            font-size: 1.125rem;
+            padding: 0.75rem 1rem; /* Reduced horizontal padding */
+            font-size: 1rem; /* Reduced font size */
             font-weight: 600;
             color: #9ca3af; /* gray-400 */
             background-color: transparent;
             border-bottom: 4px solid transparent;
             transition: all 0.3s ease;
             cursor: pointer;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .tab-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1.125rem;
+            }
         }
         .tab-button.active {
             color: var(--color-primary-dark);
@@ -314,6 +320,15 @@
             color: #9ca3af; /* Lighter gray */
             letter-spacing: 0.2em;
             text-transform: uppercase;
+        }
+
+        /* NEW: Hide scrollbar for horizontal carousels */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
     </style>
 </head>
@@ -477,9 +492,13 @@
         <div class="container mx-auto text-center">
             <span class="text-accent-red font-semibold text-lg">What We Do</span>
             <h2 class="section-h2 text-primary-dark mt-2 mb-12">Our Expert Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            <!-- NEW: Mobile-first horizontal scroll, switches to grid on md -->
+            <div class="flex overflow-x-auto space-x-6 p-4 -m-4 md:grid md:grid-cols-3 md:gap-8 md:max-w-6xl md:mx-auto md:space-x-0 md:p-0 md:m-0 hide-scrollbar">
+                
                 <!-- Service Card 1: Electrical Services -->
-                <div class="bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                <!-- NEW: Updated mobile sizing -->
+                <div class="w-4/5 sm:w-3/5 md:w-full flex-shrink-0 md:flex-shrink bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                     <div class="bg-accent-red p-4 rounded-full mb-6">
                         <svg class="w-12 h-12 text-neutral-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
@@ -493,8 +512,10 @@
                         Get a Quote
                     </a>
                 </div>
+                
                 <!-- Service Card 2: Plumbing Services -->
-                <div class="bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                <!-- NEW: Updated mobile sizing -->
+                <div class="w-4/5 sm:w-3/5 md:w-full flex-shrink-0 md:flex-shrink bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                     <div class="bg-accent-red p-4 rounded-full mb-6">
                         <!-- Simple water drop icon -->
                         <svg class="w-12 h-12 text-neutral-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.25c-4.14 0-7.5 3.36-7.5 7.5 0 4.14 7.5 11.25 7.5 11.25s7.5-7.11 7.5-11.25c0-4.14-3.36-7.5-7.5-7.5zM12 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
@@ -507,8 +528,10 @@
                         Get a Quote
                     </a>
                 </div>
+                
                 <!-- Service Card 3: Mechanical Solutions -->
-                <div class="bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                <!-- NEW: Updated mobile sizing -->
+                <div class="w-4/5 sm:w-3/5 md:w-full flex-shrink-0 md:flex-shrink bg-neutral-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-transparent hover:border-accent-red hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                     <div class="bg-accent-red p-4 rounded-full mb-6">
                         <!-- Simple settings/cog icon -->
                         <svg class="w-12 h-12 text-neutral-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37-2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -529,7 +552,8 @@
     <section id="work-and-news" class="py-16 md:py-24 px-6 bg-neutral-light-gray">
         <div class="container mx-auto text-center max-w-6xl">
             <!-- Tab Navigation -->
-            <div class="flex justify-center border-b border-gray-300 mb-12" id="tabs-nav">
+            <!-- NEW: Added flex-wrap for mobile -->
+            <div class="flex flex-wrap justify-center border-b border-gray-300 mb-12" id="tabs-nav">
                 <button class="tab-button active" data-target="projects-panel">Completed Projects</button>
                 <button class="tab-button" data-target="gallery-panel">Gallery</button>
                 <button class="tab-button" data-target="blog-panel">Latest Blog</button>
@@ -539,7 +563,8 @@
             <div>
                 <!-- Projects Panel -->
                 <div id="projects-panel" class="tab-panel active" data-layout="grid">
-                    <div id="projects-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- NEW: Mobile-first horizontal scroll, switches to grid on md -->
+                    <div id="projects-container" class="flex overflow-x-auto space-x-6 p-4 -m-4 md:grid md:grid-cols-3 md:gap-8 md:max-w-6xl md:mx-auto md:space-x-0 md:p-0 md:m-0 hide-scrollbar">
                         <!-- Project cards will be dynamically inserted here by JavaScript -->
                         <p class="text-lg text-primary-dark col-span-full">Loading projects...</p>
                     </div>
@@ -561,7 +586,8 @@
 
                 <!-- Blog Panel -->
                 <div id="blog-panel" class="tab-panel" data-layout="grid">
-                    <div id="blog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- NEW: Mobile-first horizontal scroll, switches to grid on md -->
+                    <div id="blog-posts-container" class="flex overflow-x-auto space-x-6 p-4 -m-4 md:grid md:grid-cols-3 md:gap-8 md:max-w-6xl md:mx-auto md:space-x-0 md:p-0 md:m-0 hide-scrollbar">
                         <!-- Blog posts will be dynamically inserted here by JavaScript -->
                         <p class="text-lg text-primary-dark col-span-full">Loading blog posts...</p>
                     </div>
@@ -648,9 +674,11 @@
     <!-- REDESIGNED Footer Section -->
     <footer class="bg-primary-dark text-neutral-white pt-16 pb-8 px-6">
         <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+            <!-- NEW: Mobile-first 2-column grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
                 <!-- Column 1: Logo & About -->
-                <div>
+                <!-- NEW: Spans 2 cols on mobile -->
+                <div class="col-span-2 text-center md:text-left">
                     <a href="#" class="inline-block mb-4" aria-label="Fast Electro Mechanic Solutions Home">
                         <svg class="h-16 w-auto" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M28.431 10.431L18.214 28.334H33.078L22.861 10.431H28.431ZM20.301 30.556L10 46.875V10H16.126L26.343 27.903H11.479L21.696 45.806L31.913 27.903H37L26.783 44.222L37 60H30.874L20.301 42.097V60H14.431V30.556H20.301Z" fill="#FFFFFF"/>
@@ -665,7 +693,7 @@
                 </div>
                 
                 <!-- Column 2: Quick Links -->
-                <div>
+                <div class="text-center sm:text-left">
                     <h4 class="text-lg font-semibold text-neutral-white mb-4">Quick Links</h4>
                     <ul class="space-y-3">
                         <li><a href="#about" class="text-gray-400 hover:text-accent-red transition duration-300">About Us</a></li>
@@ -677,26 +705,26 @@
                 </div>
 
                 <!-- Column 3: Contact Info -->
-                <div>
+                <div class="text-center sm:text-left">
                     <h4 class="text-lg font-semibold text-neutral-white mb-4">Contact Us</h4>
                     <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center justify-center md:justify-start space-x-2">
+                        <li class="flex items-center justify-center sm:justify-start space-x-2">
                             <i class="fas fa-map-marker-alt fa-fw text-accent-red"></i>
                             <span>Vellikulam, Kerala, India</span>
                         </li>
-                        <li class="flex items-center justify-center md:justify-start space-x-2">
+                        <li class="flex items-center justify-center sm:justify-start space-x-2">
                             <i class="fas fa-phone-alt fa-fw text-accent-red"></i>
                             <a href="tel:+919562773436" class="hover:text-accent-red transition duration-300">+91 95627 73436</a>
                         </li>
-                        <li class="flex items-center justify-center md:justify-start space-x-2">
+                        <li class="flex items-center justify-center sm:justify-start space-x-2">
                             <i class="fas fa-envelope fa-fw text-accent-red"></i>
                             <a href="mailto:jobinkuriankuriankottarathil@gmail.com" class="hover:text-accent-red transition duration-300 text-xs sm:text-sm">jobinkuriankuriankottarathil@gmail.com</a>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Column 4: Social Media -->
-                <div>
+                <!-- Column 4: Social Media (Moves to new row on mobile) -->
+                <div class="col-span-2 lg:col-span-1 text-center md:text-left">
                     <h4 class="text-lg font-semibold text-neutral-white mb-4">Follow Us</h4>
                     <div class="flex justify-center md:justify-start space-x-5 text-2xl">
                         <a href="https://www.instagram.com/__fast_electro_mechanical_?igsh=MWcxOHh0eXh5dXpobQ==" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent-red transition duration-300 transform hover:scale-110">
@@ -802,8 +830,9 @@
                     const post = doc.data();
                     // Create card for public site
                     const postDate = post.createdAt?.toDate ? new Date(post.createdAt.toDate()) : new Date();
+                    // NEW: Updated mobile sizing
                     const postCard = `
-                        <div class="bg-neutral-white rounded-2xl shadow-xl overflow-hidden border border-neutral-light-gray text-left transition duration-300 transform hover:shadow-2xl hover:-translate-y-1">
+                        <div class="w-4/5 sm:w-3/5 md:w-full flex-shrink-0 bg-neutral-white rounded-2xl shadow-xl overflow-hidden border border-neutral-light-gray text-left transition duration-300 transform hover:shadow-2xl hover:-translate-y-1">
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold text-primary-dark mb-2">${post.title || 'Blog Post'}</h3>
                                 <p class="text-gray-500 text-sm mb-4">${postDate.toLocaleDateString()}</p>
@@ -835,8 +864,9 @@
                 querySnapshot.forEach((doc) => {
                     const project = doc.data();
                     // Create card for public site
+                    // NEW: Updated mobile sizing
                     const projectCard = `
-                        <div class="bg-neutral-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-neutral-light-gray">
+                        <div class="w-4/5 sm:w-3/5 md:w-full flex-shrink-0 bg-neutral-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-neutral-light-gray">
                             <img src="${project.imageUrl || 'https://placehold.co/600x400/000000/F8F8F8?text=Project+Image'}" alt="${project.title || 'Project'}" class="w-full h-56 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/000000/F8F8F8?text=Image+Missing';">
                             <div class="p-6 text-left">
                                 <h3 class="text-xl font-semibold text-primary-dark mb-2">${project.title || 'Project Title'}</h3>
